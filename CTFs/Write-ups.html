@@ -1,0 +1,297 @@
+<section class="wu-page">
+    <!-- Estilos "scoped" (solo afectan .wu-page) -->
+    <style>
+        /* Wrapper y título */
+        .wu-page {
+            padding: 30px 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .wu-page * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .wu-spacer {
+            grid-column: 1 / -1;
+            height: 0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .wu-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #000000;
+            font-family: Arial, sans-serif;
+        }
+
+        body.dark .wu-title {
+            color: #fffdfd;
+        }
+
+        /* Grid (idéntico al que te gustó) */
+        .wu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+            width: 100%;
+        }
+
+        /* Cards */
+        .wu-card {
+            background: #ffffff;
+            padding: 18px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            font-family: Arial, sans-serif;
+        }
+
+        .wu-card a {
+            color: rgb(31, 16, 32);
+        }
+
+        body.dark .wu-card a {
+            color: rgb(255, 255, 255);
+        }
+
+        .wu-card-title {
+            text-align: center;
+            margin-bottom: 12px;
+            color: #0c3c78;
+        }
+
+        /* Lista */
+        .wu-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .wu-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eaeaea;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.95rem;
+        }
+
+        .wu-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Estados */
+        .wu-pwned {
+            color: #00c853;
+            font-weight: 700;
+        }
+
+        .wu-notpwn {
+            color: #e53935;
+            font-weight: 700;
+        }
+
+        /* Modo oscuro (solo dentro de .wu-page) */
+        @media (prefers-color-scheme: dark) {
+            .wu-page {
+                color: #eaeaea;
+            }
+
+            .wu-card {
+                background: #1d1d1d;
+                box-shadow: 0 2px 6px rgba(255, 255, 255, 0.04);
+            }
+
+            .wu-card-title {
+                color: #82c5ff;
+            }
+
+            .wu-list li {
+                border-bottom: 1px solid #333;
+            }
+        }
+
+        /* Para pantallas medianas */
+        @media (max-width: 768px) {
+            .wu-page {
+                padding: 25px 15px;
+            }
+
+            .wu-grid {
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                gap: 20px;
+                padding: 0 10px;
+            }
+
+            .wu-card {
+                padding: 16px;
+                border-radius: 10px;
+            }
+
+            .wu-title {
+                font-size: 1.8rem;
+                margin-bottom: 25px;
+            }
+        }
+
+        /* Para pantallas pequeñas (iPhone XS: 375px) */
+        @media (max-width: 480px) {
+            .wu-page {
+                padding: 20px 10px;
+            }
+
+            .wu-grid {
+                grid-template-columns: 1fr;
+                /* Una sola columna en móvil */
+                gap: 18px;
+                padding: 0;
+                max-width: 100%;
+            }
+
+            .wu-card {
+                padding: 15px;
+                border-radius: 8px;
+                margin: 0 auto;
+                width: 100%;
+                max-width: 340px;
+                /* Límite máximo para que no se estire demasiado */
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .wu-title {
+                font-size: 1.6rem;
+                margin-bottom: 20px;
+                padding: 0 10px;
+            }
+
+            .wu-card-title {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+            }
+
+            .wu-list li {
+                padding: 7px 0;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Para pantallas muy pequeñas (iPhone SE: 320px) */
+        @media (max-width: 375px) {
+            .wu-page {
+                padding: 18px 8px;
+            }
+
+            .wu-card {
+                max-width: 100%;
+                padding: 14px 12px;
+            }
+
+            .wu-title {
+                font-size: 1.5rem;
+                margin-bottom: 18px;
+            }
+
+            /* Lista */
+            .wu-list {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .wu-list li {
+                padding: 8px 0;
+                border-bottom: 1px solid #333;
+                display: flex;
+                justify-content: space-between;
+                font-size: 0.95rem;
+            }
+
+            .wu-list li:last-child {
+                border-bottom: none;
+            }
+        }
+
+        /* Evitar que este CSS afecte elementos globales:
+       usamos solo selectores con prefijo .wu- y NO tocamos body, h1, ul globales */
+    </style>
+
+    <h1 class="wu-title">Write-ups de Máquinas</h1>
+
+    <div class="wu-grid">
+        <!-- HTB -->
+        <div class="wu-card">
+            <h2 class="wu-card-title">Hack The Box (HTB)</h2>
+            <ul class="wu-list">
+                <!-- Cuando publique el Writeup en GitGub pon el enlace:
+                <li><span><a href="#" data-load="/Social.io/CTFs/HTB/strutted.html">Strutted</a></span><span -->
+                <li><span><a href="#" data-load="CTFs/HTB/Strutted.html">Strutted</a></span><span
+                        class="wu-pwned">Pwned</span></li>
+                <li><span>Lame</span><span class="wu-notpwn">No Pwned</span></li>
+                <li><span>Shocker</span><span class="wu-notpwn">No Pwned</span></li>
+            </ul>
+        </div>
+
+        <!-- THM -->
+        <div class="wu-card">
+            <h2 class="wu-card-title">TryHackMe (THM)</h2>
+            <ul class="wu-list">
+                <li><span>Mr. Robot</span><span class="wu-notpwn">No Pwned</span></li>
+                <li><span>Blue Print</span><span class="wu-notpwn">No Pwned</span></li>
+                <li><span>Steel Mountain</span><span class="wu-notpwn">No Pwned</span></li>
+            </ul>
+        </div>
+
+        <!-- VulnHub -->
+        <div class="wu-card">
+            <h2 class="wu-card-title">VulnHub</h2>
+            <ul class="wu-list">
+                <li><span>Rickdiculously Easy</span><span class="wu-notpwn">No Pwned</span></li>
+                <li><span>Stapler</span><span class="wu-notpwn">No Pwned</span></li>
+            </ul>
+        </div>
+
+        <!-- Salto de fila -->
+        <div class="wu-spacer"></div>
+
+        <!-- RootMe -->
+        <div class="wu-card">
+            <h2 class="wu-card-title">RootMe</h2>
+            <ul class="wu-list">
+                <li><span>UnsocialBlue</span><span class="wu-notpwn">No Pwned</span></li>
+                <li><span>KeepDate</span><span class="wu-notpwn">No Pwned</span></li>
+                <li><span>Shookiken</span><span class="wu-notpwn">No Pwned</span></li>
+            </ul>
+        </div>
+
+        <div class="wu-card">
+            <h2 class="wu-card-title">Nueva plataforma</h2>
+            <ul class="wu-list">
+                <li><span>Maquina</span><span class="wu-notpwn">No Pwned</span></li>
+                <li><span>Maquina</span><span class="wu-notpwn">No Pwned</span></li>
+                <li><span>Maquina</span><span class="wu-notpwn">No Pwned</span></li>
+                <li><span>Maquina</span><span class="wu-notpwn">No Pwned</span></li>
+                <li><span>Maquina</span><span class="wu-notpwn">No Pwned</span></li>
+            </ul>
+        </div>
+
+        <!-- Salto de fila 2 -->
+        <div class="wu-spacer"></div>
+
+        <div class="wu-card">
+            <h2 class="wu-card-title">Nueva plataforma 2</h2>
+            <ul class="wu-list">
+                <li><span>Maquina 2</span><span class="wu-notpwn">No Pwned</span></li>
+                <li><span>Maquina 2</span><span class="wu-notpwn">No Pwned</span></li>
+                <li><span>Maquina 2</span><span class="wu-notpwn">No Pwned</span></li>
+                <li><span>Maquina 2</span><span class="wu-notpwn">No Pwned</span></li>
+                <li><span>Maquina 2</span><span class="wu-notpwn">No Pwned</span></li>
+                <li><span>Maquina 2</span><span class="wu-notpwn">No Pwned</span></li>
+            </ul>
+        </div>
+    </div>
+</section>

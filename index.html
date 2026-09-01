@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="https://unpkg.com/@deckdeckgo/highlight-code@latest/dist/deckdeckgo-highlight-code/deckdeckgo-highlight-code.esm.js"></script>
+    <link rel="icon" type="image/png" sizes="32x32" href="images/Icons/AS.png">
+    <title>Anonimos Sociales :: BlueSocial</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/Website/css/calllouts.css">
+    <link rel="stylesheet" href="/Website/Directory/Pentesting/reconocimiento.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <button class="menu-toggle">☰</button>
+            <span class="logo-icon">🛡️</span>
+            <h1>Blue Social - Wiki</h1>
+        </div>
+
+        <!-- Botón para mostrar/ocultar búsqueda en móviles -->
+        <button class="search-toggle" title="Buscar">🔍</button>
+
+        <div class="search-bar">
+            <input type="text" placeholder="Buscando el chiste ...">
+        </div>
+        <div class="header-actions">
+            <button class="btn btn-outline">Login</button>
+            <button class="btn btn-primary">GitHub</button>
+        </div>
+    </header>
+
+    <!-- Overlay para móviles -->
+    <div class="sidebar-overlay"></div>
+
+    <!-- Botón para abrir terminal -->
+    <button class="terminal-toggle" title="Abrir Terminal">⌨️</button>
+
+    <!-- Terminal Flotante -->
+    <div class="terminal-container">
+        <div class="terminal-header">
+            <span>terminal@hacktricks:~</span>
+            <div class="terminal-controls">
+                <div class="terminal-control terminal-close"></div>
+                <div class="terminal-control terminal-minimize"></div>
+                <div class="terminal-control terminal-maximize"></div>
+            </div>
+        </div>
+        <div class="terminal-body">
+            <div class="terminal-line">
+                <span class="terminal-prompt">$</span>
+                <span class="terminal-command">nmap -sC -sV -O 192.168.1.1</span>
+                <button class="terminal-copy" data-command="nmap -sC -sV -O 192.168.1.1">Copiar</button>
+            </div>
+            <div class="terminal-line">
+                <span class="terminal-prompt">$</span>
+                <span class="terminal-command">nmap -p- 192.168.1.1</span>
+                <button class="terminal-copy" data-command="nmap -p- 192.168.1.1">Copiar</button>
+            </div>
+            <div class="terminal-line">
+                <span class="terminal-prompt">$</span>
+                <span class="terminal-command">nmap --script vuln 192.168.1.1</span>
+                <button class="terminal-copy" data-command="nmap --script vuln 192.168.1.1">Copiar</button>
+            </div>
+            <div class="terminal-line">
+                <span class="terminal-prompt">$</span>
+                <span class="terminal-command">sqlmap -u "http://example.com/page.php?id=1" --dbs</span>
+                <button class="terminal-copy"
+                    data-command='sqlmap -u "http://example.com/page.php?id=1" --dbs'>Copiar</button>
+            </div>
+            <div class="terminal-line">
+                <span class="terminal-prompt">$</span>
+                <span class="terminal-command">gobuster dir -u http://example.com -w
+                    /usr/share/wordlists/dirb/common.txt</span>
+                <button class="terminal-copy"
+                    data-command="gobuster dir -u http://example.com -w /usr/share/wordlists/dirb/common.txt">Copiar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificación de copiado -->
+    <div class="copy-notification">¡Comando copiado al portapapeles!</div>
+
+    <!-- Contenedor principal -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <h2>Contenido</h2>
+            <ul>
+                <!-- Inicio - No tiene sublista -->
+                <li>
+                    <a href="#" class="active nav__link">Inicio</a>
+                </li>
+
+                <!-- Pentesting - Con sublista -->
+                <li class="list__item list__item--click">
+                    <div class="list__button list__button--click">
+                        <a href="#" class="nav__link">Pentesting</a>
+                        <span class="nav__arrow">▼</span>
+                    </div>
+                    <ul class="list__show">
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">Reconocimiento</a>
+                        </li>
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">Escaneo</a>
+                        </li>
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">Explotación</a>
+                        </li>
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">Post-explotación</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Web Hacking - Con sublista -->
+                <li class="list__item list__item--click">
+                    <div class="list__button list__button--click">
+                        <a href="#" class="nav__link">Web Hacking</a>
+                        <span class="nav__arrow">▼</span>
+                    </div>
+                    <ul class="list__show">
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">SQL Injection</a>
+                        </li>
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">XSS</a>
+                        </li>
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">CSRF</a>
+                        </li>
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">File Upload</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Red Team - Con sublista -->
+                <li class="list__item list__item--click">
+                    <div class="list__button list__button--click">
+                        <a href="#" class="nav__link">Red Team</a>
+                        <span class="nav__arrow">▼</span>
+                    </div>
+                    <ul class="list__show">
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">Active Directory</a>
+                        </li>
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">Lateral Movement</a>
+                        </li>
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">Privilege Escalation</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Blue Team - Con sublista -->
+                <li class="list__item list__item--click">
+                    <div class="list__button list__button--click">
+                        <a href="#" class="nav__link">Blue Team</a>
+                        <span class="nav__arrow">▼</span>
+                    </div>
+                    <ul class="list__show">
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">SIEM</a>
+                        </li>
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">EDR</a>
+                        </li>
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">Forensics</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Herramientas - Con sublista -->
+                <li class="list__item list__item--click">
+                    <div class="list__button list__button--click">
+                        <a href="#" class="nav__link">Herramientas</a>
+                        <span class="nav__arrow">▼</span>
+                    </div>
+                    <ul class="list__show">
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">Nmap</a>
+                        </li>
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">Metasploit</a>
+                        </li>
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">Burp Suite</a>
+                        </li>
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">Wireshark</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- CTFs - Con sublista -->
+                <li class="list__item list__item--click">
+                    <div class="list__button list__button--click">
+                        <a href="#" class="nav__link">CTFs</a>
+                        <span class="nav__arrow">▼</span>
+                    </div>
+                    <ul class="list__show">
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">Write-ups</a>
+                        </li>
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">Técnicas</a>
+                        </li>
+                        <li class="list__inside">
+                            <a href="#" class="nav__link nav__link--inside">Herramientas</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Contenido principal -->
+        <main class="main-content">
+            <section class="welcome-section">
+                <h1>Bienvenido a Anónimos Sociales : BlueSocial</h1>
+                <p>Tu recurso principal para técnicas de hacking, pentesting y ciberseguridad. Encuentra guías, trucos y
+                    metodologías para mejorar tus habilidades de seguridad.</p>
+            </section>
+
+            <div class="content-grid">
+                <div class="card">
+                    <h3>Pentesting</h3>
+                    <ul>
+                        <li><a href="#">Metodología de Pentesting</a></li>
+                        <li><a href="#">Técnicas de Reconocimiento</a></li>
+                        <li><a href="#">Escaneo de Puertos</a></li>
+                        <li><a href="#">Enumeración de Servicios</a></li>
+                        <li><a href="#">Explotación de Vulnerabilidades</a></li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Web Hacking</h3>
+                    <ul>
+                        <li><a href="#">Inyección SQL</a></li>
+                        <li><a href="#">Cross-Site Scripting (XSS)</a></li>
+                        <li><a href="#">Cross-Site Request Forgery (CSRF)</a></li>
+                        <li><a href="#">Server-Side Request Forgery (SSRF)</a></li>
+                        <li><a href="#">File Inclusion Vulnerabilities</a></li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Red Team</h3>
+                    <ul>
+                        <li><a href="#">Active Directory Attacks</a></li>
+                        <li><a href="#">Lateral Movement</a></li>
+                        <li><a href="#">Privilege Escalation</a></li>
+                        <li><a href="#">Persistence Techniques</a></li>
+                        <li><a href="#">Defense Evasion</a></li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <h3>Herramientas</h3>
+                    <ul>
+                        <li><a href="#">Nmap - Escaneo de Red</a></li>
+                        <li><a href="#">Metasploit - Framework de Explotación</a></li>
+                        <li><a href="#">Burp Suite - Testing de Aplicaciones Web</a></li>
+                        <li><a href="#">Wireshark - Análisis de Tráfico</a></li>
+                        <li><a href="#">John the Ripper - Password Cracking</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <section style="margin-top:35px;text-align:center;">
+                <h2>Comandos</h2>
+
+                <div class="code-block-container">
+                    <button class="code-copy-btn" data-code='nmap -sC -sV -O 192.168.1.1'>COPY</button>
+                    <div class="code-block">
+                        <span class="code-comment"># Ejemplo de escaneo con Nmap</span><br>
+                        <span class="code-keyword">nmap</span> -sC -sV -O <span class="code-string">192.168.1.1</span><!--<br><br>
+                        <span class="code-comment"># Escaneo de todos los puertos</span><br>
+                        <span class="code-keyword">nmap</span> -p- <span class="code-string">192.168.1.1</span><br><br>
+                        <span class="code-comment"># Scripts de NSE para vulnerabilidades</span><br>
+                        <span class="code-keyword">nmap</span> --script vuln <span class="code-string">192.168.1.1</span> -->
+                    </div>
+                </div>
+
+                <div class="code-block-container">
+                    <button class="code-copy-btn"
+                        data-code='sqlmap -u "http://example.com/page.php?id=1" --dbs'>COPY</button>
+                    <div class="code-block">
+                        <span class="code-comment"># Ejemplo de SQLMap para enumerar bases de datos</span><br>
+                        <span class="code-keyword">sqlmap</span> -u <span
+                            class="code-string">"http://example.com/page.php?id=1"</span> --dbs
+                    </div>
+                </div>
+
+                <div class="code-block-container">
+                    <button class="code-copy-btn"
+                        data-code='gobuster dir -u http://example.com -w /usr/share/wordlists/dirb/common.txt'>COPY</button>
+                    <div class="code-block">
+                        <span class="code-comment"># Ejemplo de Gobuster para descubrir directorios</span><br>
+                        <span class="code-keyword">gobuster</span> dir -u <span
+                            class="code-string">http://example.com</span> -w <span
+                            class="code-string">/usr/share/wordlists/dirb/common.txt</span>
+                    </div>
+                </div>
+            </section>
+
+            <section style="margin-top:40px;text-align:center;">
+                <h2>Tabla de Puertos Comunes</h2>
+                <div style="margin:auto;max-width:900px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Puerto</th>
+                                <th>Servicio</th>
+                                <th>Descripción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>21</td>
+                                <td>FTP</td>
+                                <td>Protocolo de transferencia de archivos</td>
+                            </tr>
+                            <tr>
+                                <td>22</td>
+                                <td>SSH</td>
+                                <td>Shell seguro</td>
+                            </tr>
+                            <tr>
+                                <td>80</td>
+                                <td>HTTP</td>
+                                <td>Servidor web</td>
+                            </tr>
+                            <tr>
+                                <td>443</td>
+                                <td>HTTPS</td>
+                                <td>Servidor web seguro</td>
+                            </tr>
+                            <tr>
+                                <td>3389</td>
+                                <td>RDP</td>
+                                <td>Escritorio remoto</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

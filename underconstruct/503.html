@@ -1,0 +1,208 @@
+<section class="uc-wrapper">
+    <div class="uc-card">
+
+        <!-- ICONO GRÚA -->
+        <div class="uc-icon">
+            <svg width="120" height="120" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24 216H232" stroke="white" stroke-width="14" stroke-linecap="round" />
+                <path d="M56 216V120L144 40L200 88L120 160" stroke="white" stroke-width="14" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <circle cx="120" cy="160" r="22" fill="white" stroke="#f8ab48" stroke-width="10" />
+            </svg>
+        </div>
+
+        <h1 class="uc-title">Sección en construcción</h1>
+
+        <p class="uc-text">
+            Estamos trabajando para habilitar este apartado.
+            Pronto encontrarás herramientas y módulos nuevos relacionados con pruebas de ciberseguridad y defensa.
+        </p>
+
+        <div class="uc-buttons">
+
+            <button class="uc-btn-outline" onclick="(function(){
+                    if(typeof originalMainContent!=='undefined'){
+                        document.querySelector('.main-content').innerHTML = originalMainContent;
+                    } else {
+                        location.reload();
+                    }
+                })();">
+                Volver al inicio
+            </button>
+
+            <button class="uc-btn-primary" onclick="(function(){
+                    if(typeof loadPage==='function'){
+                        loadPage('reconocimiento.html');
+                    }
+                })();">
+                Ir a Reconocimiento
+            </button>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    /* ===================================================
+    FONDO GLOBAL AUTO (LIGHT / DARK MODE)
+   =================================================== */
+    :root {
+        color-scheme: light dark;
+    }
+
+    /* Fondo completo automático */
+    .uc-wrapper {
+        width: auto;
+        min-height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+
+        /* Light Mode por defecto */
+        background: #f5f5f5;
+    }
+
+    /* Dark mode automático detectado por navegador */
+    @media (prefers-color-scheme: dark) {
+        .uc-wrapper {
+            background: #121212 !important;
+        }
+    }
+
+    /* ===================================================
+    TARJETA - LIGHT MODE
+   =================================================== */
+    .uc-card {
+        background: #ffffff;
+        border-radius: 18px;
+        padding: 45px 35px;
+        max-width: 760px;
+        width: 100%;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+        animation: fadeInUp 0.7s ease both;
+    }
+
+    .uc-icon {
+        width: 180px;
+        height: 180px;
+        background: linear-gradient(135deg, #f8ab48, #ffcd70);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .uc-title {
+        margin: 0;
+        font-size: 2rem;
+        color: #2b2b2b;
+        font-weight: 600;
+    }
+
+    .uc-text {
+        margin: 0;
+        color: #666;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        max-width: 580px;
+        text-align: center;
+    }
+
+    .uc-buttons {
+        display: flex;
+        gap: 14px;
+        margin-top: 10px;
+    }
+
+    /* Botón outline */
+    .uc-btn-outline {
+        padding: 12px 22px;
+        border-radius: 8px;
+        border: 1.6px solid #d0d0d0;
+        background: #ffffff;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .uc-btn-outline:hover {
+        background: #f1f1f1;
+    }
+
+    /* Botón primario */
+    .uc-btn-primary {
+        padding: 12px 22px;
+        border-radius: 8px;
+        border: none;
+        background: #f8ab48;
+        color: white;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .uc-btn-primary:hover {
+        background: #e89b3f;
+    }
+
+    /* ===================================================
+    TARJETA - DARK MODE
+   =================================================== */
+    @media (prefers-color-scheme: dark) {
+
+        .uc-card {
+            background: #1a1a1a;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .uc-title {
+            color: #f2f2f2;
+        }
+
+        .uc-text {
+            color: #d0d0d0;
+        }
+
+        .uc-icon {
+            background: linear-gradient(135deg, #e28a2e, #f2b355);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.30);
+        }
+
+        .uc-btn-outline {
+            background: #161616;
+            color: #f0f0f0;
+            border-color: #444;
+        }
+
+        .uc-btn-outline:hover {
+            background: #222;
+        }
+
+        .uc-btn-primary {
+            background: #e18f35;
+        }
+
+        .uc-btn-primary:hover {
+            background: #cc7d2c;
+        }
+    }
+
+    /* Animación */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>

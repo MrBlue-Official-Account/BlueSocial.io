@@ -1,0 +1,968 @@
+/* Variables CSS */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #fa0202;
+    --accent-color: #e74c3c;
+    --light-color: #ecf0f1;
+    --dark-color: #2c3e50;
+    --sidebar-width: 300px;
+    --header-height: 60px;
+    --terminal-bg: #1e1e1e;
+    --terminal-text: #00ff00;
+}
+
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Header */
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0 15px;
+    height: var(--header-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo h1 {
+    font-size: 1.3rem;
+}
+
+.logo-icon {
+    font-size: 1.5rem;
+}
+
+.search-bar {
+    flex: 1;
+    max-width: 500px;
+    margin: 0 15px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    font-size: 0.9rem;
+}
+
+.header-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 0.85rem;
+}
+
+.btn-primary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+}
+
+.btn-outline:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Terminal Flotante */
+.terminal-container {
+    position: fixed;
+    top: 70px;
+    right: 10px;
+    width: 95%;
+    max-width: 400px;
+    background-color: var(--terminal-bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    overflow: hidden;
+    display: none;
+}
+
+.terminal-header {
+    background-color: #333;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    font-size: 0.85rem;
+}
+
+.terminal-controls {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-control {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.terminal-close {
+    background-color: #ff5f56;
+}
+
+.terminal-minimize {
+    background-color: #ffbd2e;
+}
+
+.terminal-maximize {
+    background-color: #27c93f;
+}
+
+.terminal-body {
+    padding: 12px;
+    font-family: 'Courier New', monospace;
+    color: var(--terminal-text);
+    max-height: 300px;
+    overflow-y: auto;
+    font-size: 0.85rem;
+}
+
+.terminal-line {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.terminal-prompt {
+    color: #3498db;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+.terminal-command {
+    flex: 1;
+    word-break: break-all;
+    min-width: 0;
+}
+
+.terminal-copy {
+    background: none;
+    border: none;
+    color: #ccc;
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 0.75rem;
+    padding: 2px 6px;
+    border-radius: 3px;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.terminal-copy:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.copy-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #2ecc71;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    display: none;
+    font-size: 0.9rem;
+}
+
+/* Botón para abrir terminal */
+.terminal-toggle {
+    position: fixed;
+    top: 70px;
+    right: 10px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.terminal-toggle:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.1);
+}
+
+/* Contenedor principal */
+.main-container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--light-color);
+    padding: 15px;
+    overflow-y: auto;
+    position: fixed;
+    top: var(--header-height);
+    left: -100%;
+    height: calc(100vh - var(--header-height));
+    transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 99;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.sidebar h2 {
+    margin-bottom: 15px;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 5px;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar li {
+    margin-bottom: 5px;
+}
+
+/* Estilos para el menú desplegable */
+.list__item--click {
+    cursor: pointer;
+}
+
+.list__button--click {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 8px 10px;
+    color: var(--dark-color);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.list__button--click:hover {
+    background-color: rgba(0, 149, 255, 0.1);
+    color: var(--secondary-color);
+}
+
+.nav__arrow {
+    transition: transform 0.3s;
+    font-size: 0.7rem;
+    color: var(--dark-color);
+}
+
+.list__button--click.arrow .nav__arrow {
+    transform: rotate(90deg);
+}
+
+.list__show {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.4s;
+    list-style: none;
+    padding-left: 0;
+    margin-left: 15px;
+    border-left: 1px solid #ddd;
+}
+
+.list__inside {
+    list-style: none;
+}
+
+.nav__link {
+    display: block;
+    padding: 8px 10px;
+    color: var(--dark-color);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+    flex: 1;
+    text-align: left;
+}
+
+.nav__link:hover {
+    background-color: rgba(40, 57, 69, 0.1);
+    color: var(--secondary-color);
+}
+
+.nav__link.active {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.nav__link--inside {
+    padding: 6px 15px;
+    margin-left: 0;
+    border-left: none;
+}
+
+.nav__link--inside:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+    color: var(--secondary-color);
+}
+
+.sidebar a {
+    display: block;
+    padding: 8px 10px;
+    color: var(--dark-color);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+}
+
+.sidebar a:hover {
+    background-color: rgba(40, 57, 69, 0.1);
+    color: var(--secondary-color);
+}
+
+.sidebar a.active {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+/* Overlay para móviles */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 98;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Contenido principal */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.welcome-section {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-section h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.welcome-section p {
+    font-size: 1rem;
+    max-width: 100%;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+    font-size: 1.2rem;
+}
+
+.card ul {
+    list-style-type: none;
+}
+
+.card li {
+    margin-bottom: 6px;
+    padding-left: 18px;
+    position: relative;
+    font-size: 0.95rem;
+}
+
+.card li:before {
+    content: "•";
+    color: var(--secondary-color);
+    position: absolute;
+    left: 0;
+}
+
+.card a {
+    color: var(--dark-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.card a:hover {
+    color: var(--secondary-color);
+}
+
+/* Responsive */
+.menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 5px;
+}
+
+/* Estilos para código */
+.code-block-container {
+    max-width: 750px !important;  /* Más pequeño y elegante */
+    margin: 15px auto !important; /* Centrado */
+    position: relative;
+}
+
+.code-block {
+    background-color: #2d2d2d;
+    color: #f8f8f2;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-family: 'Courier New', monospace;
+    position: relative;
+    font-size: 0.85rem;
+}
+
+.code-copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: #444;
+    color: #fff;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.code-copy-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.code-keyword {
+    color: #f92672;
+}
+
+.code-string {
+    color: #a6e22e;
+}
+
+.code-comment {
+    color: #75715e;
+}
+
+/* Estilos para tablas */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 0.9rem;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: var(--light-color);
+    color: var(--primary-color);
+}
+
+tr:hover {
+    background-color: rgba(52, 152, 219, 0.05);
+}
+
+/* Ocultar el icono de search-toggle */
+.search-toggle{
+    display: none;
+}
+
+/* Media Queries para tablets */
+@media (min-width: 768px) {
+    .logo h1 {
+        font-size: 1.5rem;
+    }
+
+    .search-bar {
+        margin: 0 20px;
+    }
+
+    .btn {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+
+    .terminal-container {
+        width: 400px;
+        right: 20px;
+    }
+
+    .terminal-toggle {
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+
+    .main-container {
+        flex-direction: row;
+    }
+
+    .menu-toggle{
+        display: none !important;
+    }
+
+    .sidebar {
+        width: var(--sidebar-width);
+        position: sticky;
+        left: 0;
+        height: calc(100vh - var(--header-height));
+    }
+
+    .main-content {
+        padding: 25px;
+    }
+
+    .welcome-section {
+        padding: 25px;
+    }
+
+    .welcome-section h1 {
+        font-size: 2.2rem;
+    }
+
+    .content-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .code-block {
+        font-size: 0.9rem;
+    }
+
+    table {
+        font-size: 0.95rem;
+    }
+
+    th,
+    td {
+        padding: 10px;
+    }
+}
+
+/* Media Queries para desktop */
+@media (min-width: 1024px) {
+    .content-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .menu-toggle{
+        display: none !important;
+    }
+
+    .main-content {
+        padding: 30px;
+    }
+
+    .welcome-section {
+        padding: 30px;
+    }
+
+    .welcome-section h1 {
+        font-size: 2.5rem;
+    }
+
+    .welcome-section p {
+        font-size: 1.1rem;
+    }
+
+    .sidebar {
+        padding: 20px;
+    }
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 360px) {
+    .logo h1 {
+        font-size: 1.1rem;
+    }
+
+    .header-actions {
+        order: 2;
+        flex-shrink: 0;
+        gap: 5px;
+    }
+
+    .btn {
+        padding: 5px 8px;
+        font-size: 0.8rem;
+    }
+
+    .terminal-container {
+        width: 98%;
+        right: 1%;
+    }
+
+    .terminal-body {
+        padding: 10px;
+        font-size: 0.8rem;
+    }
+
+    .main-content {
+        padding: 15px;
+    }
+
+    .welcome-section {
+        padding: 15px;
+    }
+
+    .welcome-section h1 {
+        font-size: 1.5rem;
+    }
+
+    .card {
+        padding: 12px;
+    }
+
+    .code-block {
+        padding: 12px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Mejoras para botones de terminal en móviles */
+@media (max-width: 768px) {
+    .header {
+        padding: 0 10px !important;
+        height: auto !important;
+        min-height: 60px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .terminal-copy {
+        padding: 8px 12px !important; /* Más área táctil */
+        font-size: 0.8rem !important;
+        min-height: 36px !important; /* Altura mínima para toque */
+        min-width: 60px !important; /* Ancho mínimo */
+        margin-left: 8px !important;
+    }
+
+    .terminal-line {
+        flex-wrap: nowrap !important;
+        align-items: center !important;
+        padding: 8px 0 !important;
+    }
+
+    .terminal-command {
+        font-size: 0.8rem !important;
+        line-height: 1.4 !important;
+    }
+
+    .logo {
+        order: 1;
+        flex: 1;
+        min-width: 0; /* Permite que se reduzca */
+    }
+
+    .logo h1 {
+        font-size: 1.1rem !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 150px;
+    }
+
+    .search-bar {
+        order: 3;
+        flex: 1 0 100%;
+        max-width: 100% !important;
+        margin: 5px 0 !important;
+        display: none; /* Ocultar en móviles por defecto */
+    }
+
+    .search-bar.active {
+        display: block; /* Mostrar cuando se active */
+    }
+
+    .header-actions {
+        order: 2;
+        flex-shrink: 0;
+        gap: 5px;
+    }
+
+    .btn {
+        padding: 6px 10px !important;
+        font-size: 0.8rem !important;
+    }
+
+    /* Añadir botón de búsqueda para móviles */
+    .search-toggle {
+        display: inline-block;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+        padding: 5px;
+        margin-left: 5px;
+    }
+
+    .menu-toggle {
+        margin-right: 5px;
+    }
+}
+
+/* Para pantallas muy pequeñas */
+@media (max-width: 480px) {
+    .header {
+        padding: 0 8px !important;
+    }
+
+    .terminal-copy {
+        padding: 6px 10px !important;
+        font-size: 0.75rem !important;
+        min-height: 32px !important;
+        min-width: 50px !important;
+    }
+
+    .terminal-body {
+        padding: 10px !important;
+    }
+
+    .terminal-command {
+        font-size: 0.75rem !important;
+        margin-right: 5px !important;
+    }
+
+    .logo h1 {
+        font-size: 1rem !important;
+        max-width: 120px;
+    }
+
+    .btn {
+        padding: 5px 8px !important;
+        font-size: 0.75rem !important;
+    }
+
+    .header-actions {
+        gap: 3px;
+    }
+
+    .logo-icon {
+        font-size: 1.2rem;
+    }
+}
+
+/* ==========================================================
+    MODO OSCURO AUTOMÁTICO
+========================================================== */
+
+body.dark {
+    background-color: #0d0d0d;
+    color: #e9e9e9;
+}
+
+/* Sidebar */
+body.dark .sidebar h2{
+    color: #ffffff;
+}
+
+body.dark .nav__arrow{
+    color: #ffffff;
+}
+
+body.dark .sidebar {
+    background-color: #161616; /* Color del SideBar entero */
+    border-right: 1px solid #fa0202;
+}
+
+body.dark .sidebar a {
+    color: #ddd;
+}
+
+body.dark .sidebar a.active {
+    background: #222;
+    color: #fff;
+}
+
+/* Cards */
+body.dark .card {
+    background: #1a1a1a;
+    border: 1px solid #2b2b2b;
+}
+
+body.dark .card h3 {
+    color: #fff;
+}
+
+body.dark .card ul li a {
+    color: #6e82f6;          /* color de los enlaces */
+    text-decoration: none;
+}
+
+body.dark .card ul li a:hover {
+    color: #87d2ff;          /* color del hover */
+}
+
+/* Terminal */
+body.dark .terminal-container {
+    background: #000;
+    border: 1px solid #333;
+}
+
+body.dark .terminal-body {
+    background: #0d0d0d;
+}
+
+body.dark .terminal-command {
+    color: #00ff88;
+}
+
+/* Botones */
+body.dark .btn-primary {
+    background: #fa0202;
+}
+
+body.dark .btn-outline {
+    border-color: #444;
+    color: #ddd;
+}
+
+/* Código */
+body.dark .code-block {
+    background: #1a1a1a;
+    color: #e0e0e0;
+}
+
+body.dark .code-keyword {
+    color: #ff5f5f;
+}
+
+body.dark .code-string {
+    color: #8aff8a;
+}
+
+body.dark .code-comment {
+    color: #888;
+}
+
+/* Tabla */
+body.dark table {
+    background: #111;
+    color: #ddd;
+}
+
+body.dark table th {
+    background: #222;
+    color: #00ff00; /* Color del Texto ht */
+}
+
+body.dark table tr:nth-child(even) {
+    background: #181818;
+}
