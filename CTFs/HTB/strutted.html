@@ -716,26 +716,26 @@ Service detection performed. Please report any incorrect results...
             </div>
             <!-- Imagen Strutted__.png -->
             <div style="text-align: center; margin: 20px 0;">
-                <img alt="Strutted_.png" src="../../images/HTB/Strutted/strutted__etc_hosts.png"
+                <img alt="Strutted_.png" src="./images/HTB/Strutted/strutted__etc_hosts.png"
                     style="max-width: 100%; height: auto; border-radius: 8px;">
             </div>
         </div>
 
         <p>Recargamos y vemos la página:</p>
         <div style="text-align: center; margin: 20px 0;">
-                <img alt="Strutted_.png" src="../../images/HTB/Strutted/Strutted__.png"
+                <img alt="Strutted_.png" src="./images/HTB/Strutted/Strutted__.png"
                     style="max-width: 100%; height: auto; border-radius: 8px;">
         </div>
 
         <p>Al hacer click en Downloads, se inicia la descarga de un archivo <code>.zip</code> que contiene el entorno Docker para esta aplicación en particular. Tras extraer el contenido, observamos una contraseña codificada en texto plano, pero es inútil. El archivo <code>tomcat-users.xml</code>, que contiene un <code>Dockerfile</code>, revela que el objetivo, junto con <code>tomcat9</code>, se ejecuta en <code>openjdk-17</code>. Al buscar otros archivos en el paquete, encontramos el <code>pom.xml</code>. Este archivo contiene todas las dependencias de la aplicación.</p>
         <div style="text-align: center; margin: 20px 0;">
-                <img alt="Strutted_.png" src="../../images/HTB/Strutted/Strutted___.png"
+                <img alt="Strutted_.png" src="./images/HTB/Strutted/Strutted___.png"
                     style="max-width: 100%; height: auto; border-radius: 8px;">
         </div>
 
         <p>Algo interesante de filtrar qué tecnologías usan las webs son sus versiones; ya que una búsqueda rápida en google os topamos con quizás vulnerabilidades en dicha versión.</p>
         <div style="text-align: center; margin: 20px 0;">
-                <img alt="Strutted_.png" src="../../images/HTB/Strutted/Strutted____.png"
+                <img alt="Strutted_.png" src="./images/HTB/Strutted/Strutted____.png"
                     style="max-width: 100%; height: auto; border-radius: 8px;">
         </div>
 
@@ -881,14 +881,14 @@ private boolean isImageByMagicBytes(File file) {
         <p>Por lo tanto, tenemos restricciones de tipo de contenido y la aplicación valida los bytes mágicos de un archivo para confirmar que se trata de un archivo de imagen. Si se superan estas comprobaciones, el archivo se carga en el servidor en un directorio dentro de la carpeta de cargas, que se nombra con la marca de tiempo actual. Intentamos cargar cualquier otro tipo de archivo y recibimos este error:</p><br>
 
         <div style="text-align: center; margin: 20px 0;">
-                <img alt="Strutted_.png" src="../../images/HTB/Strutted/Strutted_____.png"
+                <img alt="Strutted_.png" src="./images/HTB/Strutted/Strutted_____.png"
                     style="max-width: 100%; height: auto; border-radius: 8px;">
         </div><br>
 
         <p>Caso contrario si subimos el archivo especificado.</p>
 
         <div style="text-align: center; margin: 20px 0;">
-                <img alt="Strutted_.png" src="../../images/HTB/Strutted/Strutted______.png"
+                <img alt="Strutted_.png" src="./images/HTB/Strutted/Strutted______.png"
                     style="max-width: 100%; height: auto; border-radius: 8px;">
         </div>
     </div>
@@ -1018,7 +1018,7 @@ if __name__ == "__main__":
                 </div>
                 <br>
                 <div style="text-align: center; margin: 20px 0;">
-                    <img alt="Strutted_.png" src="../../images/HTB/Strutted/strutted________.png"
+                    <img alt="Strutted_.png" src="./images/HTB/Strutted/strutted________.png"
                         style="max-width: 100%; height: auto; border-radius: 8px;">
                 </div>
             </div>
@@ -1037,7 +1037,7 @@ if __name__ == "__main__":
             <p>Mayoritariamente, tratamos de ganar acceso mediante una reverse shell, sin embargo, podemos omitirlo por esta vez; ya que tenemos archivos que posiblemente tengan acceso al ssh del usuario: <code>/etc/passwd</code>.</p><br>
 
             <div style="text-align: center; margin: 20px 0;">
-                <img alt="Strutted_.png" src="../../images/HTB/Strutted/strutted_________.png"
+                <img alt="Strutted_.png" src="./images/HTB/Strutted/strutted_________.png"
                     style="max-width: 100%; height: auto; border-radius: 8px;">
             </div>
 
@@ -1051,7 +1051,7 @@ if __name__ == "__main__":
                 </div>
 
                 <div style="text-align: center; margin: 20px 0;">
-                    <img alt="Strutted_.png" src="../../images/HTB/Strutted/strutted___________.png"
+                    <img alt="Strutted_.png" src="./images/HTB/Strutted/strutted___________.png"
                         style="max-width: 100%; height: auto; border-radius: 8px;">
                 </div>
             </div>
@@ -1059,7 +1059,7 @@ if __name__ == "__main__":
             <p>Bingo, ganamos acceso!</p>
 
             <div style="text-align: center; margin: 20px 0;">
-                <img alt="Strutted_.png" src="../../images/HTB/Strutted/strutted__________.png"
+                <img alt="Strutted_.png" src="./images/HTB/Strutted/strutted__________.png"
                     style="max-width: 100%; height: auto; border-radius: 8px;">
             </div><br>
         </div><br>
@@ -1083,14 +1083,14 @@ if __name__ == "__main__":
             </div>
             <br>
             <div style="text-align: center; margin: 20px 0;">
-                <img alt="Strutted_.png" src="../../images/HTB/Strutted/strutted____________.png"
+                <img alt="Strutted_.png" src="./images/HTB/Strutted/strutted____________.png"
                     style="max-width: 100%; height: auto; border-radius: 8px;">
             </div>
 
             <p>Hay una entrada <a href="https://gtfobins.github.io/gtfobins/tcpdump/">tcpdump | GTFOBins</a> para <code>tcpdump</code> que muestra cómo escalar privilegios utilizando <code>tcpdump</code> cuando se configura para ejecutarse con permisos <code>sudo</code>. Podemos aprovechar esto para crear un script que copie <code>/bin/bash</code> a <code>/tmp/bash_root</code> , le asigne el bit <code>setuid</code> y lo ejecute con privilegios de <code>root</code>.</p><br>
 
             <div style="text-align: center; margin: 20px 0;">
-                <img alt="Strutted_.png" src="../../images/HTB/Strutted/strutted_____________.png"
+                <img alt="Strutted_.png" src="./images/HTB/Strutted/strutted_____________.png"
                     style="max-width: 100%; height: auto; border-radius: 8px;">
             </div>
 
@@ -1131,14 +1131,14 @@ sudo tcpdump -ln -i lo -w /dev/null -W 1 -G 1 -z $TF -Z root
             </div><br>
 
             <div style="text-align: center; margin: 20px 0;">
-                <img alt="Strutted_.png" src="../../images/HTB/Strutted/strutted______________.png"
+                <img alt="Strutted_.png" src="./images/HTB/Strutted/strutted______________.png"
                     style="max-width: 100%; height: auto; border-radius: 8px;">
             </div>
 
             <p>Comprobamos la <code>suid</code></p><br>
 
             <div style="text-align: center; margin: 20px 0;">
-                <img alt="Strutted_.png" src="../../images/HTB/Strutted/strutted_______________.png"
+                <img alt="Strutted_.png" src="./images/HTB/Strutted/strutted_______________.png"
                     style="max-width: 100%; height: auto; border-radius: 8px;">
             </div>
 
@@ -1153,7 +1153,7 @@ bash -p
             </div>
 
             <div style="text-align: center; margin: 20px 0;">
-                <img alt="Strutted_.png" src="../../images/HTB/Strutted/strutted________________.png"
+                <img alt="Strutted_.png" src="./images/HTB/Strutted/strutted________________.png"
                     style="max-width: 100%; height: auto; border-radius: 8px;">
             </div>
 
